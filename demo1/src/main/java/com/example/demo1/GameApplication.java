@@ -22,13 +22,13 @@ public class GameApplication extends Application
     @Override
     public void start(Stage theStage)
     {
-        theStage.setTitle( "Sorceress of Issan" );
+        theStage.setTitle( "Sorceress of Isan" );
 
         Group root = new Group();
         Scene theScene = new Scene( root );
         theStage.setScene( theScene );
 
-        Canvas canvas = new Canvas( 1200, 700 );
+        Canvas canvas = new Canvas( 1280, 720 );
         root.getChildren().add( canvas );
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
