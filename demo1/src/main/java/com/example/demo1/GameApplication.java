@@ -1,10 +1,20 @@
 package com.example.demo1;
 
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
+import javafx.event.ActionEvent;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -12,38 +22,49 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
 import javafx.scene.image.Image;
 
-public class GameApplication extends Application
-{
-    public static void main(String[] args)
-    {
-        launch(args);
-    }
+import java.util.Stack;
 
+public class GameApplication extends Application{//PLEASE put the opening braces on the top next time NAT >:( ~NS :)
     @Override
-    public void start(Stage theStage)
-    {
-        theStage.setTitle( "Sorceress of Isan" );
+    public void start(Stage theStage){
+        Button startButton = new Button("Start");
+        startButton.setLayoutX(100);
+        startButton.setLayoutY(80);
+        Text startText = new Text("START HERE PLAYER");
+        startText.setLayoutX(500);
+        startText.setLayoutY(353);
+        Image startImagePNG = new Image( "SOIMainScreen.png" );
+        ImageView startImage = new ImageView(startImagePNG);
+        TextField startTextField = new TextField();
+        startTextField.setEditable(true);
 
-        Group root = new Group();
-        Scene theScene = new Scene( root );
-        theStage.setScene( theScene );
 
-        Canvas canvas = new Canvas( 1280, 720 );
-        root.getChildren().add( canvas );
+        //Button Action
+        startButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                startButton.setText("THIS BUTTON IS PRESSED");
+            }
+        });
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        gc.setFill( Color.RED );
-        gc.setStroke( Color.BLACK );
-        gc.setLineWidth(2);
-        Font theFont = Font.font( "Times New Roman", FontWeight.BOLD, 48 );
-        gc.setFont( theFont );
-        gc.fillText( "Hello, World!", 60, 50 );
-        gc.strokeText( "Hello, World!", 60, 50 );
+        HBox textAndButton = new HBox();
+        textAndButton.getChildren().addAll(startButton , startText, startTextField);
 
-        Image earth = new Image( "SOIMainScreen.png" );
-        gc.drawImage( earth, 0, 100 );
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(startImage, textAndButton);
+
+        Group root = new Group(stackPane);
+
+        theStage.setTitle( "The Sorceress of Isan" );
+        Scene theScene = new Scene(root);
+
+        theStage.setScene(theScene);
 
         theStage.show();
+    }
+
+    public static void main(String[] args){
+        launch(args);
     }
 }
