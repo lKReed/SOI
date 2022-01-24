@@ -39,17 +39,14 @@ public class GameApplication extends Application{//PLEASE put the opening braces
         startTextField.setEditable(true);
 
 
+
+
         //Button Action
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                startButton.setText("THIS BUTTON IS PRESSED");
-            }
-        });
+
 
 
         HBox textAndButton = new HBox();
-        textAndButton.getChildren().addAll(startButton , startText, startTextField);
+        textAndButton.getChildren().addAll(startButton , startTextField);
 
         StackPane stackPane = new StackPane();
         stackPane.getChildren().addAll(startImage, textAndButton);
@@ -62,6 +59,17 @@ public class GameApplication extends Application{//PLEASE put the opening braces
         theStage.setScene(theScene);
 
         theStage.show();
+/*      THIS IS WHERE I START TO TRY TO MAKE THE NEW SCENES BUT IT STARTS ERRORS
+        Group root2 = new Group(startText);
+        Scene theScene2 = new Scene(root2);
+        theStage.setScene(theScene2);
+        startButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                startButton.setText("THIS BUTTON IS PRESSED");
+                theStage.show();
+            }
+        });*/
     }
 
     public static void main(String[] args){
