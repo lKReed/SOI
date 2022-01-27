@@ -5,10 +5,12 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -38,18 +40,28 @@ public class GameApplication extends Application{//PLEASE put the opening braces
 
         FileInputStream stream = new FileInputStream("C:\\Users\\lkree\\IdeaProjects\\SOI\\SOIMainScreen.png");
         Image image = new Image(stream);
-        ImageView imageview = new ImageView(image);
-
-        StackPane layout = new StackPane(imageview, startButton);
+        ImageView startImage = new ImageView(image);
+        startImage.setPreserveRatio(true);
+/*
+        GridPane resizeLayout = new GridPane();
+        resizeLayout.setPadding(new Insets(10, 10, 10, 10));
+        resizeLayout.setVgap(5);
+        resizeLayout.setHgap(5);
+*/
+        StackPane layout = new StackPane(startImage, startButton);
         StackPane layout2 = new StackPane();
+
+       // resizeLayout.add(layout, 0, 0);
+
         Scene scene = new Scene(layout, 1280, 720);
         Scene scene2 = new Scene(layout2, 1280, 720);
 
         theStage.setTitle("The Sorceress of Isan");
         theStage.setScene(scene);
+        theStage.setFullScreen(true);
         theStage.show();
 
-        startButton.setOnAction(e -> theStage.setScene(scene2));
+        startButton.setOnAction(e -> {theStage.setScene(scene2); theStage.setFullScreen(true);});
     }
 
     public static void main(String[] args){
