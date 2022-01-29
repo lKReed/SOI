@@ -37,8 +37,14 @@ public class GameApplication extends Application{//PLEASE put the opening braces
         Button startButton = new Button("START");
         startButton.setMinSize(200, 50);
         // startButton.setStyle("-fx-border-color: black; -fx-text-fill: black; -fx-border- width: 3px; -fx-font-size: 30px;");
+        FileInputStream stream;
+        try {
+            stream = new FileInputStream("demo1\\src\\main\\resources\\SOIMainScreen.png");
+        }
+        catch(Exception e){
+            stream = new FileInputStream("demo1/src/main/resources/SOIMainScreen.png");
+        }
 
-        FileInputStream stream = new FileInputStream("C:\\Users\\lkree\\IdeaProjects\\SOI\\SOIMainScreen.png");
         Image image = new Image(stream);
         ImageView startImage = new ImageView(image);
         startImage.setPreserveRatio(true);
