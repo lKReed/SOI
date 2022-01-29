@@ -37,6 +37,7 @@ public class GameApplication extends Application{//PLEASE put the opening braces
         Button startButton = new Button("START");
         startButton.setMinSize(200, 50);
         // startButton.setStyle("-fx-border-color: black; -fx-text-fill: black; -fx-border- width: 3px; -fx-font-size: 30px;");
+
         FileInputStream stream;
         try {
             stream = new FileInputStream("demo1\\src\\main\\resources\\SOIMainScreen.png");
@@ -60,6 +61,12 @@ public class GameApplication extends Application{//PLEASE put the opening braces
        // resizeLayout.add(layout, 0, 0);
 
         Scene scene = new Scene(layout, 1280, 720);
+        try {
+            scene.getStylesheets().add("demo1\\src\\main\\java\\com.example.demo1\\stylesheet.css");
+        }
+        catch(Exception e){
+            scene.getStylesheets().add("demo1/src/main/java/com.example.demo1/stylesheet.css");
+        }
         Scene scene2 = new Scene(layout2, 1280, 720);
 
         theStage.setTitle("The Sorceress of Isan");
