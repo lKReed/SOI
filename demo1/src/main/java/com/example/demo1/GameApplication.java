@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -30,28 +31,23 @@ import javafx.scene.image.Image;
 import java.io.FileInputStream;
 import java.util.Stack;
 
-public class GameApplication extends Application{//PLEASE put the opening braces on the top next time NAT >:( ~NS :)
+public class GameApplication extends Application{
     @Override
     public void start(Stage theStage) throws Exception {
 
         Button startButton = new Button("START");
         startButton.setMinSize(200, 50);
-        // startButton.setStyle("-fx-border-color: black; -fx-text-fill: black; -fx-border- width: 3px; -fx-font-size: 30px;");
+
+        TextArea text = new TextArea();
+
+        VBox vBox = new VBox(text);
 
         FileInputStream stream = new FileInputStream("C:\\Users\\lkree\\IdeaProjects\\SOI\\SOIMainScreen.png");
         Image image = new Image(stream);
         ImageView startImage = new ImageView(image);
         startImage.setPreserveRatio(true);
-/*
-        GridPane resizeLayout = new GridPane();
-        resizeLayout.setPadding(new Insets(10, 10, 10, 10));
-        resizeLayout.setVgap(5);
-        resizeLayout.setHgap(5);
-*/
-        StackPane layout = new StackPane(startImage, startButton);
+        StackPane layout = new StackPane(startImage, vBox, startButton);
         StackPane layout2 = new StackPane();
-
-       // resizeLayout.add(layout, 0, 0);
 
         Scene scene = new Scene(layout, 1280, 720);
         Scene scene2 = new Scene(layout2, 1280, 720);
@@ -61,7 +57,7 @@ public class GameApplication extends Application{//PLEASE put the opening braces
         theStage.setFullScreen(true);
         theStage.show();
 
-        startButton.setOnAction(e -> {theStage.setScene(scene2); theStage.setFullScreen(true);});
+        startButton.setOnAction(e -> { System.out.println(text.getText()); });
     }
 
     public static void main(String[] args){
