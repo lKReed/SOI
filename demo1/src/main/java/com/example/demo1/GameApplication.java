@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -32,23 +33,19 @@ public class GameApplication extends Application{
     @Override
     public void start(Stage theStage) throws Exception {
 
-        // start button declaration
-        Button startButton = new Button("START");
-        startButton.setMinSize(200, 50);
+        Font font = Font.font("Times New Roman");
 
         // dialogue button declaration - there is a way to change button text, so we'll likely do that to present dialogue options when we get there
         Button dialogueOption1 = new Button("1");
         Button dialogueOption2 = new Button("2");
         Button next = new Button("Next");
-
-        // start screen background
-        FileInputStream stream = new FileInputStream("C:\\Users\\lkree\\IdeaProjects\\SOI\\SOIMainScreen.png");
-        Image image = new Image(stream);
-        ImageView startImage = new ImageView(image);
-        startImage.setPreserveRatio(true);
+        dialogueOption1.setFont(font);
+        dialogueOption2.setFont(font);
+        next.setFont(font);
 
         // dialogue screen text - need help figuring out files and stuff to pull dialogue from there
-        Text text = new Text("Testing testing 123");
+        Label text = new Label("Testing testing 123");
+        text.setFont(font);
 
         // puts dialogue buttons in a HBox so we can control where they are on the screen
         HBox dialogueButtons = new HBox(30, dialogueOption1, dialogueOption2);
@@ -57,27 +54,45 @@ public class GameApplication extends Application{
         HBox.setMargin(dialogueOption2, new Insets(20,20,20,20));
 
         // puts text in a VBox so we can control where it is on the screen
-        VBox dialogue = new VBox(30, text, next);
+        VBox dialogue = new VBox(30, text, next, dialogueButtons);
         dialogue.setAlignment(Pos.CENTER);
         HBox.setMargin(text, new Insets(20,20,20,20));
         HBox.setMargin(next, new Insets(20,20,20,20));
+        HBox.setMargin(dialogueButtons, new Insets(60,60,60,60));
 
         // declares stackpanes
-        StackPane startLayout = new StackPane(startImage, startButton);
-        StackPane dialogueLayout = new StackPane(dialogueButtons, dialogue);
+        StackPane dialogueLayout = new StackPane(dialogue);
 
         // scene declaration
-        Scene startScreen = new Scene(startLayout, 1280, 720);
         Scene dialogueScreen = new Scene(dialogueLayout, 1280, 720);
 
         // sets up the stage in fullscreen and shows it
         theStage.setTitle("The Sorceress of Isan");
-        theStage.setScene(startScreen);
+        theStage.setScene(dialogueScreen);
         theStage.setFullScreen(true);
         theStage.show();
 
-        // transitions to dialogue screen when start button is pressed - realistically there will be a scene or two before the dialogue scene, but we'll get there when we get there
-        startButton.setOnAction(e -> {theStage.setScene(dialogueScreen); theStage.setFullScreen(true);});
+        // button actions
+        dialogueOption1.setDisable(true);
+        dialogueOption2.setDisable(true);
+        next.setOnAction(e -> {
+            text.setText("New text!");
+            dialogueOption1.setDisable(false);
+            dialogueOption2.setDisable(false);
+            next.setDisable(true);
+        });
+        dialogueOption1.setOnAction(e -> {
+            text.setText("First option clicked!");
+            dialogueOption2.setDisable(true);
+            dialogueOption1.setDisable(true);
+            next.setDisable(false);
+        });
+        dialogueOption2.setOnAction(e -> {
+            text.setText("Second option clicked!");
+            dialogueOption2.setDisable(true);
+            dialogueOption1.setDisable(true);
+            next.setDisable(false);
+        });
     }
 
     public static void main(String[] args){
