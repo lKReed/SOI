@@ -43,8 +43,10 @@ public class GameApplication extends Application{
         potionB.setFont(font);
         hintB.setFont(font);
 
-        Label instructions = new Label("Instructions");
+        Label instructions = new Label("In order to get past this, you will need to deactivate all of the trapped stairs. By my count, there are 100 stairs here. Every third stair should let out fire, every fifth should let out poison. If it is a multiple of three and of five, then both will occur. To deactivate a fire stair, you must print “fizz”. For poison stairs, “buzz”. For both, “fizzbuzz”. Using loops, this should go off without a hitch. Good luck!");
         instructions.setFont(font);
+        instructions.setPrefSize(300, 500);
+        instructions.setWrapText(true);
 
         Label hint = new Label("");
         hint.setFont(font);
@@ -56,12 +58,17 @@ public class GameApplication extends Application{
         stars.setFont(font);
 
         TextArea code = new TextArea();
+        code.setMinSize(700, 650);
 
-        VBox instructionsPotions = new VBox(30, mana, instructions, potionB);
+        HBox stats = new HBox(mana, stars);
+        stats.setAlignment(Pos.TOP_CENTER);
+        HBox.setMargin(mana, new Insets(20,20,20,20));
+        HBox.setMargin(stars, new Insets(20, 20, 20, 20));
+
+        VBox instructionsPotions = new VBox(15, instructions, potionB);
         instructionsPotions.setAlignment(Pos.CENTER_LEFT);
-        VBox.setMargin(mana, new Insets(20,20,20,20));
-        VBox.setMargin(instructions, new Insets(20,20,20,20));
-        VBox.setMargin(potionB, new Insets(20,20,20,20));
+        //VBox.setMargin(instructions, new Insets(20,20,20,20));
+        //VBox.setMargin(potionB, new Insets(20,20,20,20));
 
         VBox hintBox = new VBox(30, hintB, hint);
         hintBox.setAlignment(Pos.CENTER_RIGHT);
@@ -69,19 +76,24 @@ public class GameApplication extends Application{
         VBox.setMargin(stars, new Insets(20,20,20,20));
         VBox.setMargin(hint, new Insets(20,20,20,20));
 
-        VBox codeBox = new VBox(30, stars, code, submitB);
+        VBox codeBox = new VBox(30, stats, code, submitB);
         codeBox.setAlignment(Pos.CENTER);
         HBox.setMargin(code, new Insets(20,20,20,20));
         HBox.setMargin(submitB, new Insets(20,20,20,20));
 
-        HBox layout = new HBox(30, instructionsPotions, codeBox, hintBox);
-        layout.setAlignment(Pos.CENTER);
-        HBox.setMargin(instructions, new Insets(20,20,20,20));
+        HBox middle = new HBox(30, instructionsPotions, codeBox, hintBox);
+        middle.setAlignment(Pos.CENTER);
+        //HBox.setMargin(instructionsPotions, new Insets(20,20,20,20));
         HBox.setMargin(codeBox, new Insets(20,20,20,20));
         HBox.setMargin(hintB, new Insets(20,20,20,20));
 
+        /*
+        VBox layout = new VBox(30,middle);
+        layout.setAlignment(Pos.CENTER);
+         */
+
         // declares stackpanes
-        StackPane encounterLayout = new StackPane(layout);
+        StackPane encounterLayout = new StackPane(middle);
 
         // scene declaration
         Scene encounterScreen = new Scene(encounterLayout, 1280, 720);
